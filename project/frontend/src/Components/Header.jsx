@@ -17,7 +17,7 @@ function Header() {
             <ul className=' fixed right-2 top-0 space-y-3'>
             <li onClick={()=>setLoginIcon(false)} className='flex justify-end'><IoIosClose size={30}/></li>
             <li><Link to='/login'>Login</Link></li>
-            <li><Link to='/signup'>Register</Link></li>
+            <li><Link to='/register'>Register</Link></li>
             </ul>
         </div>
     </nav>
