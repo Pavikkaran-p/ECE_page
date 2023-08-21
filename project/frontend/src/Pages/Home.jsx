@@ -7,6 +7,7 @@ function Home() {
   useEffect(()=>{
     const token = localStorage.getItem('Token')
     if(token != null){
+      try {
       fetch('/checkjwt',{
         method: 'GET',
         headers : {
@@ -21,6 +22,10 @@ function Home() {
           setIsLoading(false)
         }
       })
+    }
+      catch {
+        setIsLoading(false)
+      }
     } else {
       setIsLoading(false)
     }

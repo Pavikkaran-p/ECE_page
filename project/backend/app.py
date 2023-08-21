@@ -14,6 +14,7 @@ from Sources.users import Login, Register, RegisterVerify, VerifyJWT
 api.add_resource(Login, '/login')
 api.add_resource(Register, '/register')
 api.add_resource(VerifyJWT, '/checkjwt')
+api.add_resource(RegisterVerify, '/registerverify')
 
 
 from Models.tables import cursor, conn

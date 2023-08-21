@@ -58,7 +58,7 @@ class Register(Resource):
                 return {'status':False, "msg":'Email Already Registered'}
             cursor.execute("insert into users (name, email, password, created_on, role) values (%s,%s, %s, %s, 'student')",(name, email, hashed_pw, datetime.utcnow()))
             conn.commit()
-            jwt = create_access_token(identity = email, additional_claims = { 'name' : name },expires_delta=timedelta(minutes=5))
+            jwt = create_access_token(identity = email, additional_claims = { 'name' : name, 'type' : 'verfication' },expires_delta=timedelta(minutes=5))
             Account_Verify_Mail(email,jwt)
             return {'status':True}
         except ValidationError as err:
@@ -67,20 +67,26 @@ class Register(Resource):
 class RegisterVerify(Resource):
     @jwt_required()
     def post(self):
-        claims = get_jwt()
-        email = claims['email']
-        data = request.get_json()
-        password = data['password']
+        try:
+            claims = get_jwt()
+            email = claims['sub']
+            jwt_type = claims['type']
+            data = request.get_json()
+            password = data['password']
+        except Exception as err:
+            return {'status':False, 'message':f'missing {err} value'}
         cursor.execute("select * from users where email = %s and status = 0",(email))
         user = cursor.fetchone()
-        if user:
+        if user != None:
             if (bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8'))):
-                cursor.execute("update table users set status = 1 where email = %s",(email))
+                cursor.execute("update users set status = 1 where email = %s",(email))
+                conn.commit()
                 return {'status':True}
         else :
             return {'status':False, 'message':"Wrong Credentials"}
-        
+            
 class VerifyJWT(Resource):
     @jwt_required()
     def get(self):
         return {'status':True}
+    
