@@ -12,11 +12,8 @@ function App() {
       <Routes>
         <Route path="/" Component={Home}/>
         <Route path="/login" Component={Login}/>
-<<<<<<< HEAD
         <Route path="/verifyAccount/:jwt" Component={VerifyAccount}/>
-=======
         <Route path="/register" Component={Register}/>
->>>>>>> e47aa8dbcd6fa4e249bc00ad064400ea82d93e16
         <Route path="/dashboard" Component={Dashboard}/>
         <Route path="*" Component={Pagenotfount}/>
       </Routes>
