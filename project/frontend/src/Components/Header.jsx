@@ -48,7 +48,7 @@ function Header() {
           <div>
           <div className='md:flex gap-3 hidden'>
               <p><Link to='/login'>Login</Link></p>
-              <p><Link to='/signup'>Register</Link></p>
+              <p><Link to='/register'>Register</Link></p>
           </div>
             <p className={`${!LoginIcon ? "block" : "hidden"} md:hidden`} onClick={()=>setLoginIcon(true)}><IoIosLogIn size={30}/></p>
             <div className={`${LoginIcon ? "block" : "hidden"}`}>
