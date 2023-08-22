@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Header from '../Components/Header';
 
 function Dashboard() {
     document.title = "Dashboard"
@@ -33,7 +34,8 @@ function Dashboard() {
             <div>Loading...</div>
             :
             <div>
-                Dashboard
+              <Header/>
+                <div className='text-center font-bold text-3xl'>Dashboard</div>
             </div>
         }
     </>

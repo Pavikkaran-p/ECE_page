@@ -7,25 +7,26 @@ function Home() {
   useEffect(()=>{
     const token = localStorage.getItem('Token')
     if(token != null){
-      try {
       fetch('/checkjwt',{
         method: 'GET',
         headers : {
           'Authorization' : `Bearer ${token}`
         }
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          setIsLoading(false)
+        }
+        return response.json();
+    })
       .then(data => {
+        console.log("Some error")
         if (data.status){
           navigate('/dashboard')
         } else {
           setIsLoading(false)
         }
       })
-    }
-      catch {
-        setIsLoading(false)
-      }
     } else {
       setIsLoading(false)
     }
