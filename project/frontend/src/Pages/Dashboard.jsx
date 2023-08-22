@@ -1,43 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import Header from '../Components/Header';
 
 function Dashboard() {
     document.title = "Dashboard"
-    const navigate = useNavigate();
-    const [IsLoading, setIsLoading] = useState(true)
+    // const navigate = useNavigate();
+    const [IsLoggedIn, setIsLoggedIn] = useState(false);
+    const [IsLoading, setIsLoading] = useState(true);
+
+    const [Hackathons, setHackathons] = useState([])
+
+    async function fetchhackathons(){
+      const response = await fetch('/gethackathons')
+      const data = response.json()
+      if (data.status){
+        setHackathons(data.hackathons)
+        setIsLoading(false)
+      } 
+    }
     useEffect(()=>{
-        const token = localStorage.getItem('Token')
-        if(token != null){
-          fetch('/checkjwt',{
-            method: 'GET',
-            headers : {
-              'Authorization' : `Bearer ${token}`
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (!data.status){
-            //   window.location.href = '/'
-            navigate('/')
-            } else {
-              setIsLoading(false)
-            }
-          })
-        } else {
-            window.location.href = "/"
-        }
-      })
+      if (IsLoggedIn === true){
+        fetchhackathons()
+      }
+    },[IsLoggedIn])
+
   return (
     <> 
-        {IsLoading ? 
-            <div>Loading...</div>
-            :
             <div>
-              <Header/>
+              <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+              <hr />
                 <div className='text-center font-bold text-3xl'>Dashboard</div>
+                {Hackathons}
+                {IsLoading &&
+                <>
+                Loading...
+                </> }
             </div>
-        }
     </>
   )
 }

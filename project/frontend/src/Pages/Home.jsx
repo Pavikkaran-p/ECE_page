@@ -3,34 +3,17 @@ import Header from '../Components/Header'
 import { useNavigate } from 'react-router-dom'
 function Home() {
   const navigate = useNavigate()
+  const [IsLoggedIn, setIsLoggedIn] = useState(false)
   const [IsLoading, setIsLoading] = useState(true)
+
   useEffect(()=>{
-    const token = localStorage.getItem('Token')
-    if(token != null){
-      fetch('/checkjwt',{
-        method: 'GET',
-        headers : {
-          'Authorization' : `Bearer ${token}`
-        }
-      })
-      .then(response => {
-        if (!response.ok) {
-          setIsLoading(false)
-        }
-        return response.json();
-    })
-      .then(data => {
-        console.log("Some error")
-        if (data.status){
-          navigate('/dashboard')
-        } else {
-          setIsLoading(false)
-        }
-      })
+    if (IsLoggedIn === true){
+      navigate('/dashboard')
     } else {
       setIsLoading(false)
     }
-  },[navigate])
+  },[IsLoggedIn,navigate])
+       
   return (
     <div>
       {
@@ -40,7 +23,7 @@ function Home() {
         </div> 
         : 
         <div className=''>
-          <Header/>
+          <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         </div>
       }
     </div>

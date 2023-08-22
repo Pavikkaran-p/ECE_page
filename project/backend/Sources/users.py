@@ -15,6 +15,7 @@ class Login(Resource):
             try:
                 email = data['email']
                 password = data['password']
+                # print(email, password)
             except Exception as err:
                 return {'status':False, 'message':f'missing {err} value'}
             schema = InputSchema()
@@ -28,7 +29,7 @@ class Login(Resource):
                             'name' : user['name'],
                             'user_id' : user['user_id']
                         })
-                        return {'status':True, 'token':token},200
+                        return {'status':True, 'token':token, 'id':user['user_id']},200
                 return {'status':False, 'message':"Check mail for the Setup"}
             return {'status':False},401
         except ValidationError as err:
@@ -88,5 +89,24 @@ class RegisterVerify(Resource):
 class VerifyJWT(Resource):
     @jwt_required()
     def get(self):
-        return {'status':True}
+        claims = get_jwt()
+        name = claims['name']
+        return {'status':True, 'name':name}
     
+class UserDetails(Resource):
+    @jwt_required()
+    def get(self, id):
+        claims = get_jwt()
+        jwt_id = claims['user_id']
+        if jwt_id == int(id):
+            editable = True
+        else :
+            editable = False
+        id = int(id)
+        query='SELECT name, user_id, email, created_on, role, phone FROM users WHERE user_id = %s AND status = 1'
+        cursor.execute(query, id)
+        # cursor.execute('select name, user_id, email, created_on, role, phone from users where user_id = %s and status = 1',(int(id)))
+        user = cursor.fetchone()
+        if user:
+            return jsonify({'status':True, 'editable':editable, 'details':user})
+        return {'status':False}

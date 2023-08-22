@@ -10,19 +10,15 @@ app.config.from_object(Config)
 jwt = JWTManager(app)
 api = Api(app)
 
-from Sources.users import Login, Register, RegisterVerify, VerifyJWT
+from Sources.users import Login, Register, RegisterVerify, VerifyJWT, UserDetails
 api.add_resource(Login, '/login')
 api.add_resource(Register, '/register')
 api.add_resource(VerifyJWT, '/checkjwt')
 api.add_resource(RegisterVerify, '/registerverify')
+api.add_resource(UserDetails, '/userdetails/<string:id>')
 
-
-from Models.tables import cursor, conn
-@app.route('/simplequery')
-def add_column():
-    cursor.execute('alter table users add column otp bigint')
-    conn.commit()
-    return {"ok":"dai"}
+from Sources.hackathons import Hackathon
+api.add_resource(Hackathon, '/gethackathons')
 
 if __name__=="__main__":
     app.run(debug = True)

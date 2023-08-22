@@ -24,6 +24,7 @@ function LoginForm() {
         const data = await response.json()
         if(data.status){
             localStorage.setItem('Token', data.token)
+            localStorage.setItem('Id',data.id)
             // window.location.href = "dashboard"
             navigate('/dashboard',{replace:true})
         }

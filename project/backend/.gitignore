@@ -1,2 +1,7 @@
 /venv
 .env
+
+.Sources/__pycache__
+.Models/__pycache__
+
+.__pycache__
