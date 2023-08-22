@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { json, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -64,6 +64,7 @@ function VerifyAccount() {
         pauseOnHover
         theme="dark"
         />
+        {Error}
         <p>To Confirm the Account</p>
         <div>
             <label >Password </label>
