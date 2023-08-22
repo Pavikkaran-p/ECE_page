@@ -5,7 +5,7 @@ function RegisterForm() {
     return(
         <div className='h-screen'>
             <div className='flex flex-col'>
-                <div>Email</div>
+                <div>Email</div>               
                 <div>Password</div>
                 <div>Re-enter Password</div>
             </div>
