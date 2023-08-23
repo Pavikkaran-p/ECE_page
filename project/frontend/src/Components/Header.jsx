@@ -53,7 +53,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
       </div>
       :
       <nav className='flex justify-between items-center px-3 bg-gradient-to-r from-green-400 to-blue-600'>
-        <Link to='/'><img className='w-10 py-1' src="https://img.freepik.com/free-vector/bird-colorful-gradient-design-vector_343694-2506.jpg"/></Link>
+        <Link to='/'><img className='w-10 py-1' src="https://img.freepik.com/free-vector/bird-colorful-gradient-design-vector_343694-2506.jpg" alt='logo'/></Link>
         <p className='uppercase font-bold'>Hackathon Page</p>
         {
           !IsLoggedIn

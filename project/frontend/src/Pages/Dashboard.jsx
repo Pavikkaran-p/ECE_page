@@ -12,9 +12,10 @@ function Dashboard() {
 
     async function fetchhackathons(){
       const response = await fetch('/gethackathons')
-      const data = response.json()
+      const data = await response.json()
+      console.log(data)
       if (data.status){
-        setHackathons(data.hackathons)
+        setHackathons(data.hackathon)
         setIsLoading(false)
       } 
     }
@@ -32,9 +33,9 @@ function Dashboard() {
                 <div className='text-center font-bold text-3xl'>Dashboard</div>
                 {Hackathons}
                 {IsLoading &&
-                <>
+                <div>
                 Loading...
-                </> }
+                </div> }
             </div>
     </>
   )

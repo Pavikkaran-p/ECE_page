@@ -32,7 +32,6 @@ function VerifyAccount() {
                     progress: undefined,
                     theme: "dark",
                 })
-                window.location.href = "/"
             } else {
                 toast.error(data.msg,{
                     position: "top-center",

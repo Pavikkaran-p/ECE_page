@@ -15,7 +15,7 @@ class Login(Resource):
             try:
                 email = data['email']
                 password = data['password']
-                # print(email, password)
+                print(email, password)
             except Exception as err:
                 return {'status':False, 'message':f'missing {err} value'}
             schema = InputSchema()
@@ -59,7 +59,7 @@ class Register(Resource):
                 return {'status':False, "msg":'Email Already Registered'}
             cursor.execute("insert into users (name, email, password, created_on, role) values (%s,%s, %s, %s, 'student')",(name, email, hashed_pw, datetime.utcnow()))
             conn.commit()
-            jwt = create_access_token(identity = email, additional_claims = { 'name' : name, 'type' : 'verfication' },expires_delta=timedelta(minutes=5))
+            jwt = create_access_token(identity = email, additional_claims = { 'name' : name, 'type' : 'verfication' },expires_delta=timedelta(hours=2))
             Account_Verify_Mail(email,jwt)
             return {'status':True}
         except ValidationError as err:
