@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
 function AddHackathonForm() {
-
+    const [Date, setDate] = useState()
     const [FormData, setFormData] = useState({
         name : "",
         organizerName : ""
     })
-    console.log(FormData)
+    console.log(Date)
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -22,7 +22,7 @@ function AddHackathonForm() {
             </div>
             <div>
                 <label>Registration Starts At:</label> <br />
-                <input type="date" />
+                <input type="datetime-local" value={Date} onChange={(e)=>setDate(e.target.value)}/>
             </div>
             <div>
                 <label>Registration Ends On:</label> <br />

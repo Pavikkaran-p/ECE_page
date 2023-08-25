@@ -20,7 +20,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
         })
         .then(response => {
           if (!response.ok) {
-            navigator('/')
+            navigator('/login')
             setIsLoading(false)
           }
           return response.json();

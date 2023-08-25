@@ -1,7 +1,9 @@
 from marshmallow import Schema, fields, validates, ValidationError
 import re
+from datetime import datetime
 
 class InputSchema(Schema):
+    #users_Schema
     name = fields.Str()
     email = fields.Email()
     password = fields.Str()
@@ -24,3 +26,9 @@ class InputSchema(Schema):
             raise ValidationError("Password must contain at least one digit")
         if not any(char.isalpha() for char in value):
             raise ValidationError("Password must contain at least one letter")
+        
+    # Hackathon_Schema
+    hackathon_name = fields.Str()
+    organisation_name = fields.Str()
+    organising_mode = fields.Str()
+    url = fields.Str()

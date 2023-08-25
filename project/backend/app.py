@@ -20,5 +20,11 @@ api.add_resource(UserDetails, '/userdetails/<string:id>')
 from Sources.hackathons import Hackathon
 api.add_resource(Hackathon, '/gethackathons')
 
+# from Models.tables import cursor,conn
+# @app.route('/table')
+# def delete__data():
+#     cursor.execute("")
+#     conn.commit()
+
 if __name__=="__main__":
     app.run(debug = True)

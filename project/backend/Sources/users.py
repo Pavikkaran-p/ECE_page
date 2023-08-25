@@ -30,8 +30,9 @@ class Login(Resource):
                             'user_id' : user['user_id']
                         })
                         return {'status':True, 'token':token, 'id':user['user_id']},200
+                    return {'status':False, 'message':"Invalid Credentials"}
                 return {'status':False, 'message':"Check mail for the Setup"}
-            return {'status':False},401
+            return {'status':False, 'message':'Invalid Credentials'},401
         except ValidationError as err:
             return {"status":False,'type':'Invalid Syntax', "message":err.messages}
     

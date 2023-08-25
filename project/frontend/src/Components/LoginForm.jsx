@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginForm() {
     document.title = "Login"
     const navigate = useNavigate()
     const [LoginMail, setLoginMail] = useState('')
     const [LoginPassword, setLoginPassword] = useState('')
-    const [Error, setError] = useState('')
     const [EmailError, setEmailError] = useState('')
     const [PasswordError, setPasswordError] = useState('')
 
@@ -30,18 +31,33 @@ function LoginForm() {
         }
         else{
             if(data.type === 'Invalid Syntax'){
+              if(data.message.email){
                 setEmailError(data.message.email)
+              }
+              if (data.message.password){
                 setPasswordError(data.message.password)
+              }
             } else {
-                setError("Invalid Credentials")
+                toast.error(
+                  data.message,{
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                }
+                )
             }
         }
     }
 
   return (
     <div className='h-screen'>
+      <ToastContainer/>
     <form onSubmit={handleLogin}>
-            {Error}
 <div className='h-screen flex items-center justify-center'>
         <div className='bg-gradient-to-b from-indigo-300 to-zinc-300 rounded-lg shadow p-6 mx-4 sm:mx-auto sm:max-w-md'>
           <div className='bg-gradient-to-b from-slate-300 to-slate-300 rounded-lg p-4'>

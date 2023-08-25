@@ -1,2 +1,6 @@
 create table users(user_id integer primary key auto_increment, name varchar(100),password varchar(250), email varchar(100) unique, created_on datetime,
  status integer default 0 , role varchar(100), phone bigint)
+
+create table events (event_id integer primary key auto_increment, name varchar(100), register_start_date datetime, 
+register_end_date datetime, hackathon_date datetime, organisation_name varchar(200), Organising_mode varchar(10), 
+location varchar(1000), description varchar(5000), url varchar(200), image_hackathon varchar(1000), Added_Date datetime)

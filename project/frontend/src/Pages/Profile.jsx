@@ -37,7 +37,7 @@ function Profile() {
                 setIsLoading(false)
             }
         })
-    },[])
+    },[id])
 
   return (
     <div>
@@ -45,12 +45,12 @@ function Profile() {
         {IsLoading &&
         <IsLoadingPage/>}
         <div>
-            {UsernotFound && 
-            <div className='h-screen fixed bg-white w-full text-5xl flex justify-center items-center'>
+            {UsernotFound ?
+            <div className='h-screen bg-white w-full text-5xl flex justify-center items-center'>
                 NoUserFound    
-            </div>}
-        </div>
-        <div className='md:flex p-4'>
+            </div>
+            :
+            <div className='md:flex p-4'>
             <div className='md:w-1/2 px-[2%]'>
                 <div className='flex text-4xl items-center  bg-gray-100 justify-between'>
                     Profile {IsEditable && <CiEdit className='hover:cursor-pointer' size={40}/>}
@@ -76,6 +76,9 @@ function Profile() {
                 More on
             </div>
         </div>
+            }
+        </div>
+        
     </div>
   )
 }
