@@ -17,8 +17,10 @@ api.add_resource(VerifyJWT, '/checkjwt')
 api.add_resource(RegisterVerify, '/registerverify')
 api.add_resource(UserDetails, '/userdetails/<string:id>')
 
-from Sources.hackathons import Hackathon
+from Sources.hackathons import Hackathon, Event, Organisation
 api.add_resource(Hackathon, '/gethackathons')
+api.add_resource(Event, '/event/<int:id>')
+api.add_resource(Organisation, '/organisation/<int:id>')
 
 # from Models.tables import cursor,conn
 # @app.route('/table')

@@ -27,7 +27,8 @@ class Login(Resource):
                     if (bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8'))):
                         token = create_access_token(identity = user['email'], additional_claims = {
                             'name' : user['name'],
-                            'user_id' : user['user_id']
+                            'user_id' : user['user_id'],
+                            'role': user['role']
                         })
                         return {'status':True, 'token':token, 'id':user['user_id']},200
                     return {'status':False, 'message':"Invalid Credentials"}
