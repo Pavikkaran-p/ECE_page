@@ -16,51 +16,54 @@ function AddHackathonForm() {
   return (
     <div>         
         <form onSubmit={()=>handleSubmit()}>
-            <div>
-                <label>Name:</label> <br />
-                <input type="text" name='name' />
+            <div className=' m-4 p-8 bg-gradient-to-b from-blue-500 to-violet-600 rounded-2xl'>
+            <div className='inline'>
+                <label>Name:</label>
+                <input className='rounded-3xl float-right mr-10' type="text" name='name' />
             </div>
-            <div>
-                <label>Registration Starts At:</label> <br />
-                <input type="datetime-local" value={Date} onChange={(e)=>setDate(e.target.value)}/>
+            <div className=' mt-3'>
+                <label className='inline'>Starts At:</label>
+                <input className='rounded-3xl float-right mr-10' type="datetime-local" value={Date} onChange={(e)=>setDate(e.target.value)}/>
             </div>
-            <div>
-                <label>Registration Ends On:</label> <br />
-                <input type="date" />
+            <div className=' mt-3'>
+                <label className='inline'>Ends On:</label>
+                <input className='rounded-3xl float-right mr-10' type="date" />
             </div>
-            <div>
-                <label>Hackathon Date:</label> <br />
-                <input type="date" />
+            <div className=' mt-3'>
+                <label className='inline'>Hackathon Date:</label>
+                <input className='rounded-3xl float-right mr-10' type="date" />
             </div>
-            <div>
-                <label>College/Organisation Name:</label> <br />
-                <input type="text" value={FormData.organizerName} onChange={(e)=>setFormData(e, "organizerName")}/>
+            <div className=' mt-3'>
+                <label className='inline'>Organisation Name:</label>
+                <input className='rounded-3xl float-right mr-10' type="text" value={FormData.organizerName} onChange={(e)=>setFormData(e, "organizerName")}/>
             </div>
             <div>
                 <label>Organising Mode:</label> <br />
-                <select>
+                <select className='rounded-3xl '>
                     <option>Online</option>
                     <option>Offline</option>
                 </select>
             </div>
             <div>
                 <label>Location</label> <br />
-                <input type="text" />
+                <input className='rounded-3xl float-right mr-10' type="text" />
             </div>
+            <br />
             <div className=''>
                 <label>Description :</label> <br />
-                <textarea cols="30" rows="10"></textarea>
+                <textarea className='rounded-3xl' cols="30" rows="10"></textarea>
             </div>
             <div>
                 <label>URL :</label> <br />
-                <input type="url" />
+                <input className='rounded-3xl' type="url" />
             </div>
             <div>
                 <label>Image</label> <br />
-                <input type="file" />
+                <input className='rounded-3xl' type="file" />
             </div>
             <input type="reset" />
-            <input type="submit" />
+            <input className='rounded-3xl' type="submit" />
+            </div>
         </form>
     </div>
   )
