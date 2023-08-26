@@ -101,7 +101,7 @@ function AddHackathonForm() {
     </div>
     <div class="mb-4">
         <label class="block">Image</label>
-        <input class="w-full mt-1" type="file" name="image" onChange={handlefileChange} required />
+        <input class="w-full mt-1 " type="file" title='Add' name="image" onChange={handlefileChange} required />
     </div>
     <div class="flex justify-between">
         <input class="rounded-lg bg-gray-300 hover:bg-gray-400 px-4 py-2" type="reset" value="Reset" />

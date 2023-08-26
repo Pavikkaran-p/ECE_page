@@ -4,10 +4,10 @@ import AddHackathonForm from '../Components/AddHackathonForm'
 function HackathonModifier() {
   return (
     <div className=' '>
-        <div className='w-[35%] '>
+        <div className='lg:w-[35%] sm:w-[90%]   '>
         <AddHackathonForm/>
         </div>
-        <div className='w-[65%]'></div>
+        <div className='lg:w-[65%]'></div>
     </div>
   )
 }
