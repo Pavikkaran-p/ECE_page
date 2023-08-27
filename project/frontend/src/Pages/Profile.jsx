@@ -13,7 +13,7 @@ function Profile() {
     const { id } = useParams();
 
     useEffect(()=>{
-        fetch(`/userdetails/${id}`,{
+        fetch(`/api/userdetails/${id}`,{
             method : 'GET',
             headers : {
                 'Authorization' : `Bearer ${localStorage.getItem('Token')}`

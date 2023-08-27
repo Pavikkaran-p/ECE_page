@@ -42,7 +42,7 @@ function Dashboard() {
     },[Search, Filter])
 
     async function fetchhackathons(){
-      const response = await fetch('/gethackathons',{
+      const response = await fetch('/api/gethackathons',{
         method : 'GET',
         headers : {
           'Authorization' : `Bearer ${localStorage.getItem('Token')}`

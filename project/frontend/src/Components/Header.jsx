@@ -13,7 +13,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
     useEffect(()=>{
       const token = localStorage.getItem('Token')
       if(token != null){
-        fetch('/checkjwt',{
+        fetch('/api/checkjwt',{
           method: 'GET',
           headers : {
             'Authorization' : `Bearer ${token}`

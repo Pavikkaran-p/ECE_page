@@ -11,7 +11,7 @@ function VerifyAccount() {
 
     async function submitVerification (){
        try {
-            const response = await fetch('/registerverify',{
+            const response = await fetch('/api/registerverify',{
                 method : 'POST',
                 headers : {
                     'Authorization' : `Bearer ${jwt}`,

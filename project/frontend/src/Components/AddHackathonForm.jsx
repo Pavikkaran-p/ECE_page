@@ -33,7 +33,7 @@ function AddHackathonForm() {
         for (var key in formdata){
             formdata2.append(key, formdata[key])
         }
-        fetch('/gethackathons',{
+        fetch('/api/gethackathons',{
             method:'POST',
             headers :{
                 'Authorization' : `Bearer ${localStorage.getItem('Token')}`
