@@ -1,7 +1,5 @@
-// import { func } from 'prop-types';
 import React, { useState } from 'react';
-// import { json } from 'react-router';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function AddHackathonForm() {
@@ -17,7 +15,6 @@ function AddHackathonForm() {
         url : "",
     })
     const [EventImage, setEventImage] = useState(null)
-    console.log(formdata)
     function handleFormChange(e){
         setFormData({
             ...formdata,
@@ -45,7 +42,21 @@ function AddHackathonForm() {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data.msg)
+            if (data.status){
+                toast.success(
+                    "Event Added Successfully",{
+                      position: "top-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                  }
+                  )
+                  document.getElementById('hackathonForm').reset() 
+            }
         })
     }
             
@@ -56,56 +67,57 @@ function AddHackathonForm() {
   return (
     <div>         
         <ToastContainer/>
-        <form onSubmit={handleSubmit}>
-        <div class="m-4 p-8 bg-gradient-to-b from-blue-500 to-violet-600 rounded-2xl">
-    <div class="mb-4">
-        <label class="block">Name:</label>
-        <input class="rounded-lg w-full mt-1" type="text" name="name" onChange={handleFormChange} required />
+        <form onSubmit={handleSubmit} id='hackathonForm'>
+        <div className="m-4 p-8 bg-gradient-to-b from-blue-500 to-violet-600 rounded-2xl">
+        <div className='flex justify-center text-white text-2xl font-bold uppercase'>ADD HERE</div>
+    <div className="mb-4">
+        <label className="block">Name:</label>
+        <input className="rounded-lg w-full mt-1" type="text" name="name" onChange={handleFormChange} required />
     </div>
-    <div class="mb-4">
-        <label class="block">Starts At:</label>
-        <input class="rounded-lg w-full mt-1" type="datetime-local" name="register_start_date" onChange={handleFormChange} required />
+    <div className="mb-4">
+        <label className="block">Starts At:</label>
+        <input className="rounded-lg w-full mt-1" type="datetime-local" name="register_start_date" onChange={handleFormChange} required />
     </div>
-    <div class="mb-4">
-        <label class="block">Ends On:</label>
-        <input class="rounded-lg w-full mt-1" type="datetime-local" name="register_end_date" onChange={handleFormChange} required />
+    <div className="mb-4">
+        <label className="block">Ends On:</label>
+        <input className="rounded-lg w-full mt-1" type="datetime-local" name="register_end_date" onChange={handleFormChange} required />
     </div>
-    <div class="mb-4">
-        <label class="block">Hackathon Date:</label>
-        <input class="rounded-lg w-full mt-1" type="datetime-local" name="hackathon_date" onChange={handleFormChange} required />
+    <div className="mb-4">
+        <label className="block">Hackathon Date:</label>
+        <input className="rounded-lg w-full mt-1" type="datetime-local" name="hackathon_date" onChange={handleFormChange} required />
     </div>
-    <div class="mb-4">
-        <label class="block">Organisation Name:</label>
-        <input class="rounded-lg w-full mt-1" type="text" name="organising_name" onChange={handleFormChange} required />
+    <div className="mb-4">
+        <label className="block">Organisation Name:</label>
+        <input className="rounded-lg w-full mt-1" type="text" name="organising_name" onChange={handleFormChange} required />
     </div>
-    <div class="mb-4">
-        <label class="block">Organising Mode:</label>
-        <select class="rounded-lg w-full mt-1" defaultValue="online" name="organising_mode" onChange={handleFormChange} required>
+    <div className="mb-4">
+        <label className="block">Organising Mode:</label>
+        <select className="rounded-lg w-full mt-1" defaultValue="online" name="organising_mode" onChange={handleFormChange} required>
             <option value="online">Online</option>
             <option value="offline">Offline</option>
         </select>
     </div>
     {formdata.organising_mode === "offline" && (
-        <div class="mb-4">
-            <label class="block">Location</label>
-            <input class="rounded-lg w-full mt-1" type="text" name="location" onChange={handleFormChange} required />
+        <div className="mb-4">
+            <label className="block">Location</label>
+            <input className="rounded-lg w-full mt-1" type="text" name="location" onChange={handleFormChange} required />
         </div>
     )}
-    <div class="mb-4">
-        <label class="block">Description :</label>
-        <textarea class="rounded-lg w-full mt-1" cols="30" rows="6" name="description" onChange={handleFormChange} required></textarea>
+    <div className="mb-4">
+        <label className="block">Description :</label>
+        <textarea className="rounded-lg w-full mt-1" cols="30" rows="6" name="description" onChange={handleFormChange} required></textarea>
     </div>
-    <div class="mb-4">
-        <label class="block">URL :</label>
-        <input class="rounded-lg w-full mt-1" type="url" name="url" onChange={handleFormChange} required />
+    <div className="mb-4">
+        <label className="block">URL :</label>
+        <input className="rounded-lg w-full mt-1" type="url" name="url" onChange={handleFormChange} required />
     </div>
-    <div class="mb-4">
-        <label class="block">Image</label>
-        <input class="w-full mt-1 " type="file" title='Add' name="image" onChange={handlefileChange} required />
+    <div className="mb-4">
+        <label className="block">Image</label>
+        <input className="w-full mt-1 " type="file" title='Add' name="image" onChange={handlefileChange} required />
     </div>
-    <div class="flex justify-between">
-        <input class="rounded-lg bg-gray-300 hover:bg-gray-400 px-4 py-2" type="reset" value="Reset" />
-        <input class="rounded-lg bg-blue-500 hover:bg-blue-600 text-white px-4 py-2" type="submit" value="Submit" />
+    <div className="flex justify-between">
+        <input className="rounded-lg bg-gray-300 hover:bg-gray-400 px-4 py-2" type="reset" value="Reset" />
+        <input className="rounded-lg bg-blue-500 hover:bg-blue-600 text-white px-4 py-2" type="submit" value="Submit" />
     </div>
 </div>
 

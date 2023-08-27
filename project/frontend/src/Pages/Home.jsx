@@ -22,7 +22,7 @@ function Home() {
           Loading...
         </div> 
         : 
-        <div className=''>
+        <div className='sticky top-0'>
           <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         </div>
       }

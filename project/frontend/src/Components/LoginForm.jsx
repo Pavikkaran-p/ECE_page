@@ -26,7 +26,7 @@ function LoginForm() {
         if(data.status){
             localStorage.setItem('Token', data.token)
             localStorage.setItem('Id',data.id)
-            // window.location.href = "dashboard"
+            localStorage.setItem('Role',data.role)
             navigate('/dashboard',{replace:true})
         }
         else{

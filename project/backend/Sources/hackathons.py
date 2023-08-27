@@ -4,9 +4,16 @@ from Models.MarshmallowSchema import InputSchema, ValidationError
 from datetime import datetime
 from Models.tables import cursor, conn
 from Models.UserAuth import admin
+from flask_jwt_extended import jwt_required
 import os
+import boto3
+import tempfile
+import datetime
+
+s3 = boto3.client('s3')
 
 class Hackathon(Resource):
+    @jwt_required()
     def get(self):
         cursor.execute('select * from events')
         events = cursor.fetchall()
@@ -40,11 +47,19 @@ class Hackathon(Resource):
         except ValidationError as err:
             return jsonify({'status':False, 'message':err.messages})
         # Some code to push the image on S3 Bucket and return the link
-        # Import boto3
-        # s3.upload_file(image, eventimage, name+url)
-        # image_url = f"https://{eventimage}.s3.amazonaws.com/{name+url}"
+        # filename = "thisisimageof"+image.filename
+        # s3.upload_file(image, 'sece-events', filename)
+        # image_url = f"https://sece-events.s3.amazonaws.com/{filename}"
         # print(image.filename)
-        image_url = 'https://media.istockphoto.com/id/1189767041/vector/hackathon-signs-round-design-template-thin-line-icon-concept-vector.jpg?s=612x612&w=0&k=20&c=DW-btIjpNjItFfk35N4KvrMkoGoqd1rEPwb_uV9IZEU='
+        filename = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '_' + image.filename            
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        image.save(temp_file)
+        temp_file.close()
+        s3.upload_file(temp_file.name, "sece-events", filename)
+        os.remove(temp_file.name)
+        
+        image_url = f"https://sece-events.s3.amazonaws.com/{filename}"
+        # image_url = 'https://media.istockphoto.com/id/1189767041/vector/hackathon-signs-round-design-template-thin-line-icon-concept-vector.jpg?s=612x612&w=0&k=20&c=DW-btIjpNjItFfk35N4KvrMkoGoqd1rEPwb_uV9IZEU='
         query = '''insert into events (name, register_start_date, register_end_date, hackathon_date, organisation_name, organising_mode, location, description,
         url, image_hackathon) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
         values = name, register_start_date, register_end_date, hackathon_date, organising_name, organising_mode, location, description, url, image_url

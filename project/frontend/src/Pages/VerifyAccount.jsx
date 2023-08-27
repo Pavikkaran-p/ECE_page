@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
@@ -47,8 +47,8 @@ function VerifyAccount() {
        } catch {
         setError("Backend Error")
        }
-
     }
+
   return (
     <div>
         <ToastContainer

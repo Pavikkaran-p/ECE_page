@@ -25,7 +25,7 @@ api.add_resource(Organisation, '/organisation/<int:id>')
 # from Models.tables import cursor,conn
 # @app.route('/table')
 # def delete__data():
-#     cursor.execute("")
+#     cursor.execute("delete from events")
 #     conn.commit()
 
 if __name__=="__main__":

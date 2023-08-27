@@ -30,7 +30,7 @@ class Login(Resource):
                             'user_id' : user['user_id'],
                             'role': user['role']
                         })
-                        return {'status':True, 'token':token, 'id':user['user_id']},200
+                        return {'status':True, 'token':token, 'id':user['user_id'], 'role': user['role']},200
                     return {'status':False, 'message':"Invalid Credentials"}
                 return {'status':False, 'message':"Check mail for the Setup"}
             return {'status':False, 'message':'Invalid Credentials'},401
@@ -93,7 +93,8 @@ class VerifyJWT(Resource):
     def get(self):
         claims = get_jwt()
         name = claims['name']
-        return {'status':True, 'name':name}
+        role = claims['role']
+        return {'status':True, 'name':name, 'role':role}
     
 class UserDetails(Resource):
     @jwt_required()

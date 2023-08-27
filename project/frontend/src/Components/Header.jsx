@@ -8,6 +8,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
     const [ProfileList, setProfileList] = useState(false);
     const [IsLoading, setIsLoading] = useState(true);
     const [UserName, setUserName] = useState('')
+    const [UserRole, setUserRole] = useState('')
     const navigator = useNavigate();
     useEffect(()=>{
       const token = localStorage.getItem('Token')
@@ -28,6 +29,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
         .then(data => {
           if (data.status){
             setUserName(data.name)
+            setUserRole(data.role)
             setIsLoggedIn(true)
             setIsLoading(false)
           }
@@ -41,6 +43,8 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
 
     function logout(){
       localStorage.removeItem('Token')
+      localStorage.removeItem('Role')
+      localStorage.removeItem('Id')
       navigator('/')
     }
 
@@ -54,7 +58,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
       :
       <nav className='flex justify-between items-center px-3 bg-gradient-to-r from-green-400 to-blue-600'>
         <Link to='/'><img className='w-10 py-1' src="https://img.freepik.com/free-vector/bird-colorful-gradient-design-vector_343694-2506.jpg" alt='logo'/></Link>
-        <p className='uppercase font-bold'>Hackathon Page</p>
+        <p className='uppercase font-bold'>Event @SECE</p>
         {
           !IsLoggedIn
           ?
@@ -80,7 +84,10 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
             <div className='absolute right-4 shadow-sm border-2 px-1 py-3 rounded-xl top-10 border-black bg-white'>
               <ul className=''>
                 <li className='md:hover:bg-blue-100 rounded px-2'><Link to={`/profile/${localStorage.getItem('Id')}`}><div>Profile</div><div className='text-xs'>{UserName}</div></Link></li>                
-                <li className='md:hover:bg-blue-100 rounded px-2'><Link>Your Events</Link></li>
+                {UserRole == 'student' &&
+                  <li className='md:hover:bg-blue-100 rounded px-2'><Link>Your Events</Link></li>}
+                {UserRole == 'admin' &&
+                  <li className='md:hover:bg-blue-100 rounded px-2'><Link to="/hackathonmodifier">Manage Event</Link></li>}
                 <li className='md:hover:bg-blue-100 rounded px-2'><Link>Contact Us  </Link></li>
                 <li className='md:hover:bg-blue-100 rounded px-2 hover:cursor-pointer' onClick={()=>logout()}>Logout</li>
               </ul>

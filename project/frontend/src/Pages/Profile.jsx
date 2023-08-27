@@ -41,7 +41,9 @@ function Profile() {
 
   return (
     <div>
-        <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        <div className='sticky top-0'>
+            <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+        </div>
         {IsLoading &&
         <IsLoadingPage/>}
         <div>
