@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,7 +20,6 @@ function VerifyAccount() {
                 body : JSON.stringify({ 'password' : ConfirmPassword })
             })
             const data = await response.json()
-            console.log(data)
             if(data.status){
                 toast.success("Account Verified",{
                     position: "top-center",
@@ -33,7 +32,7 @@ function VerifyAccount() {
                     theme: "dark",
                 })
             } else {
-                toast.error(data.msg,{
+                toast.error(data.message,{
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -48,9 +47,10 @@ function VerifyAccount() {
         setError("Backend Error")
        }
     }
+    console.log(Error)
 
   return (
-    <div>
+    <div className='w-full px-[30%] bg-gradient-to-tr from-blue-700 to-green-700'>
         <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -63,13 +63,24 @@ function VerifyAccount() {
         pauseOnHover
         theme="dark"
         />
-        {Error}
-        <p>To Confirm the Account</p>
-        <div>
-            <label >Password </label>
-            <input className='border-2 border-black rounded-sm px-2' type="password" value={ConfirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
+        <header className='px-[10%] flex justify-between'>
+            <div className=''>
+                <img src="https://i1.rgstatic.net/ii/institution.image/AS:267483406110721%401440784421397_l" alt="" />
+            </div>
+            <div className='text-2xl text-white'>
+                Verify Page
+            </div>
+        </header>
+        <div className='h-screen flex justify-center items-center'>
+            <div className='border-[2px] border-white p-[2%] '>
+                <p className='text-3xl text-white'>To Confirm the Account</p>
+                <div className='py-2'>
+                    <label className='animate-pulse text-white font-semibold'>Password </label> <br />
+                    <input className='border-2 border-white rounded-sm px-2' type="password" value={ConfirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
+                </div>
+                <button className='border-2 bg-blue-700 p-2 rounded-xl text-white font-bold' onClick={()=>submitVerification()}>Verify Account</button>
+            </div>
         </div>
-        <button onClick={()=>submitVerification()}>Verify Account</button>
     </div>
   )
 }

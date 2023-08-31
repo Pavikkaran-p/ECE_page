@@ -63,7 +63,7 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
           !IsLoggedIn
           ?
           <div>
-          <div className='md:flex gap-3 hidden'>
+          <div className='md:flex gap-2 hidden'>
               <p><Link to='/login'>Login</Link></p>
               <p><Link to='/register'>Register</Link></p>
           </div>
@@ -84,9 +84,9 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
             <div className='absolute right-4 shadow-sm border-2 px-1 py-3 rounded-xl top-10 border-black bg-white'>
               <ul className=''>
                 <li className='md:hover:bg-blue-100 rounded px-2'><Link to={`/profile/${localStorage.getItem('Id')}`}><div>Profile</div><div className='text-xs'>{UserName}</div></Link></li>                
-                {UserRole == 'student' &&
+                {UserRole === 'student' &&
                   <li className='md:hover:bg-blue-100 rounded px-2'><Link>Your Events</Link></li>}
-                {UserRole == 'admin' &&
+                {UserRole === 'admin' &&
                   <li className='md:hover:bg-blue-100 rounded px-2'><Link to="/hackathonmodifier">Manage Event</Link></li>}
                 <li className='md:hover:bg-blue-100 rounded px-2'><Link>Contact Us  </Link></li>
                 <li className='md:hover:bg-blue-100 rounded px-2 hover:cursor-pointer' onClick={()=>logout()}>Logout</li>

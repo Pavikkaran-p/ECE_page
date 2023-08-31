@@ -12,16 +12,18 @@ class Login(Resource):
     def post(self):
         try:
             data = request.get_json()
+            # print(data)
             try:
                 email = data['email']
                 password = data['password']
-                print(email, password)
+                # print(email, password)
             except Exception as err:
                 return {'status':False, 'message':f'missing {err} value'}
             schema = InputSchema()
             schema.load({'email':email, 'password':password})
             cursor.execute("select * from users where email = %s ",(email))
             user = cursor.fetchone()
+            # print(user)
             if user :
                 if user['status'] == 1:
                     if (bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8'))):

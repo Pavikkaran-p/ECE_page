@@ -67,7 +67,7 @@ function AddHackathonForm() {
   return (
     <div>         
         <ToastContainer/>
-        <form onSubmit={handleSubmit} id='hackathonForm'>
+        <form onSubmit={handleSubmit} id='hackathonForm' onReset={()=>setFormData({organising_mode:'online'})}>
         <div className="m-4 p-8 bg-gradient-to-b from-blue-500 to-violet-600 rounded-2xl">
         <div className='flex justify-center text-white text-2xl font-bold uppercase'>ADD HERE</div>
     <div className="mb-4">

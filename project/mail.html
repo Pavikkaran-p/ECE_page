@@ -1,21 +1,4 @@
-from email.message import EmailMessage
-import smtplib
-import os
-from dotenv import load_dotenv
-load_dotenv()
-
-Email_passsword = os.getenv('email_pass_key')
-def Account_Verify_Mail(email, jwt):
-    # 
-    # Some Code to mail the user
-    # 
-    sender_email = os.getenv('email_id')
-    msg = EmailMessage()
-    msg['subject'] = "Verification Mail from Hacathon @sece"
-    msg['to'] = email 
-    msg['from'] = sender_email
-    msg.set_content( '''
-        <!DOCTYPE html>
+<!DOCTYPE html>
     <html>
     <head>
         <link rel="stylesheet" type="text/css" hs-webfonts="true" href="https://fonts.googleapis.com/css?family=Lato|Lato:i,b,bi">
@@ -26,7 +9,7 @@ def Account_Verify_Mail(email, jwt):
           h2{font-size:28px;font-weight:900}
           p{font-weight:100}
           td{vertical-align:top}
-          #email{margin:auto;width:auto;background-color:#fff}
+          #email{margin:auto;width:100%;;background-color:#fff}
         </style>
     </head>
     <body bgcolor="#F5F8FA" style="width: 100%; font-family:Lato, sans-serif; font-size:18px;">
@@ -34,14 +17,14 @@ def Account_Verify_Mail(email, jwt):
         <table role="presentation" width="100%">
             <tr>
                 <td bgcolor="#00A4BD" align="center" style="color: white;">
-                    <h3> Event @SECE verification </h3>
+                    <h1> Event @SECE verification </h1>
                 </td>
         </table>
-        <a href="http://localhost:3000/verifyAccount/'''+jwt+'''">Click on the link and Enter the password</a>
+        <a style="font-size: xx-small;" href="/www.google.com">Click on the link and Enter the password</a>
         <table role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 30px 60px;">
             <tr>
                 <td>
-                    <h2>Click on the link and Enter the password</h2>
+                    <h2></h2>
                     <p>
                         You can add HTML/CSS code here to stylize your emails.
                     </p>
@@ -53,9 +36,4 @@ def Account_Verify_Mail(email, jwt):
         </table>
     </div>
     </body>
-    </html> '''
-        ,subtype='html')
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(sender_email, Email_passsword)
-        smtp.send_message(msg)
-    return 1
+    </html>

@@ -17,8 +17,17 @@ function RegisterForm() {
     }
 
     function btn_register(e){
-      e.preventDefault()
-        console.log("sfihbiuj")
+      e.preventDefault();
+      fetch('/api/register',{
+        method : 'POST',
+        headers:{
+          'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify(FormDetails)
+      }).then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+      })
     }
 
     return(
@@ -68,7 +77,7 @@ function RegisterForm() {
         </div>
         <div>
           <input
-            className='bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-6 mx-auto block w-full' title='Register' type='submit' />
+            className='bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-6 mx-auto block w-full' type='submit' />
         </div>
       </form>
     </div>

@@ -3,6 +3,7 @@ import AddHackathonForm from '../Components/AddHackathonForm'
 import Header from '../Components/Header'
 import { useNavigate } from 'react-router-dom'
 import IsLoadingPage from './IsLoadingPage'
+import Poster from '../Components/Poster'
 
 function HackathonModifier() {
   const navigator = useNavigate()
@@ -10,7 +11,7 @@ function HackathonModifier() {
   const [IsAdmin, setIsAdmin] = useState(false)
 
   useEffect(()=>{
-    fetch('/checkjwt',{
+    fetch('/api/checkjwt',{
       method :'GET',
       headers : {
         'Authorization' : `Bearer ${localStorage.getItem('Token')}`
@@ -26,7 +27,7 @@ function HackathonModifier() {
         navigator('/')
       }
     })
-  },[])
+  },[navigator])
 
   if (IsAdmin === false){
     return (
@@ -45,10 +46,14 @@ function HackathonModifier() {
       <div className='sticky top-0'>
         <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       </div>
+       <div className='flex'>
         <div className='lg:w-[35%] sm:w-[90%]   '>
-        <AddHackathonForm/>
+          <AddHackathonForm/>
         </div>
-        <div className='lg:w-[65%]'></div>
+        <div>
+          <Poster/>
+        </div>
+       </div>
     </div>
   )
 }

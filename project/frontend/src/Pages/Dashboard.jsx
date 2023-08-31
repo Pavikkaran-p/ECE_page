@@ -37,8 +37,8 @@ function Dashboard() {
     }
 
     useEffect(()=>{
-      filtereventslist()
       setCurrentPage(1)
+      filtereventslist() // eslint-disable-next-line
     },[Search, Filter])
 
     async function fetchhackathons(){
