@@ -8,12 +8,14 @@ function AddHackathonForm() {
         register_start_date : "",
         register_end_date : "",
         hackathon_date:"",
+        event_type:"hackathon",
         organising_name : "",
         organising_mode : "online",
         location : "",
         description : "",
         url : "",
     })
+    console.log(formdata)
     const [EventImage, setEventImage] = useState(null)
     function handleFormChange(e){
         setFormData({
@@ -85,6 +87,14 @@ function AddHackathonForm() {
     <div className="mb-4">
         <label className="block">Hackathon Date:</label>
         <input className="rounded-lg w-full mt-1" type="datetime-local" name="hackathon_date" onChange={handleFormChange} required />
+    </div>
+    <div className="mb-4">
+        <label className="block">Event Type:</label>
+        <select className="rounded-lg w-full mt-1" defaultValue="hackathon" name="event_type" onChange={handleFormChange} required>
+            <option value="hackathon">Hackathon</option>
+            <option value="event">Event</option>
+            <option value="conference">Conference</option>
+        </select>
     </div>
     <div className="mb-4">
         <label className="block">Organisation Name:</label>

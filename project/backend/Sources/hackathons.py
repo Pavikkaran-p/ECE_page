@@ -32,6 +32,7 @@ class Hackathon(Resource):
             register_start_date = data['register_start_date']
             register_end_date = data['register_end_date']
             hackathon_date = data['hackathon_date']
+            event_type = data['event_type']
             organising_name = data['organising_name']
             organising_mode = data['organising_mode']
             location = data['location']
@@ -61,16 +62,21 @@ class Hackathon(Resource):
         image_url = f"https://sece-events.s3.amazonaws.com/{filename}"
         # image_url = 'https://media.istockphoto.com/id/1189767041/vector/hackathon-signs-round-design-template-thin-line-icon-concept-vector.jpg?s=612x612&w=0&k=20&c=DW-btIjpNjItFfk35N4KvrMkoGoqd1rEPwb_uV9IZEU='
         query = '''insert into events (name, register_start_date, register_end_date, hackathon_date, organisation_name, organising_mode, location, description,
-        url, image_hackathon) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
-        values = name, register_start_date, register_end_date, hackathon_date, organising_name, organising_mode, location, description, url, image_url
+        url, image_hackathon, event_type) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''
+        values = name, register_start_date, register_end_date, hackathon_date, organising_name, organising_mode, location, description, url, image_url, event_type
         cursor.execute(query, values)
         conn.commit()
         return jsonify({'status':True, 'msg':'Registered Successfully'})
     
 class Event(Resource):
+    @jwt_required()
     def get(self, id):
-        return {'status': True}
+        cursor.execute("select * from events where event_id = %s",(int(id)))
+        event = cursor.fetchone()
+        # print(event)
+        return jsonify({'status': True, 'details':event})
     
+    @admin()
     def put(self, id):
         return {'status':True}
     

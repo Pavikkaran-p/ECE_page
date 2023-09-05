@@ -12,33 +12,38 @@ function Header({IsLoggedIn, setIsLoggedIn}) {
     const navigator = useNavigate();
     useEffect(()=>{
       const token = localStorage.getItem('Token')
+      try {
       if(token != null){
-        fetch('/api/checkjwt',{
-          method: 'GET',
-          headers : {
-            'Authorization' : `Bearer ${token}`
-          }
+          fetch('/api/checkjwt',{
+            method: 'GET',
+            headers : {
+              'Authorization' : `Bearer ${token}`
+            }
+          })
+          .then(response => {
+            if (!response.ok) {
+              navigator('/login')
+              setIsLoading(false)
+            }
+            return response.json();
         })
-        .then(response => {
-          if (!response.ok) {
-            navigator('/login')
-            setIsLoading(false)
-          }
-          return response.json();
-      })
-        .then(data => {
-          if (data.status){
-            setUserName(data.name)
-            setUserRole(data.role)
-            setIsLoggedIn(true)
-            setIsLoading(false)
-          }
-        })
-      } else {
-        setIsLoggedIn(false)
-        setIsLoading(false)
-        navigator('/')
-      } 
+          .then(data => {
+            if (data.status){
+              setUserName(data.name)
+              setUserRole(data.role)
+              setIsLoggedIn(true)
+              setIsLoading(false)
+            } 
+          })
+          
+        } else {
+          setIsLoggedIn(false)
+          setIsLoading(false)
+          navigator('/')
+        } 
+      } catch {
+        console.log("Backend Error")
+      }
     },[navigator,setIsLoggedIn])
 
     function logout(){

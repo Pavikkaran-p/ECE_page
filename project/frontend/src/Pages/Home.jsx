@@ -50,14 +50,15 @@ function Home() {
       <div className='h-screen pt-20'> 
         <div className='h-96'>
           <HackathonsPosters posters={HackathonPosters}/>
-          <p className='flex justify-center pt-14 text-4xl font-bold'>HACKATHON</p>
+          <p className='md:flex hidden justify-center pt-14 text-4xl font-bold'>HACKATHON</p>
         </div>
         <div className='h-96'>
           <EventsPosters posters={EventPosters}/>
-          <p className='flex justify-center pt-14 text-4xl font-bold'>EVENTS</p>
+          <p className='md:flex hidden justify-center pt-14 text-4xl font-bold'>EVENTS</p>
         </div>
         <div className='h-96'>
           <ConferencesPosters posters={ConferencePosters}/>
+          <p className='md:flex hidden justify-center pt-14 text-4xl font-bold'>Conference</p>
         </div>
       </div>
     </div>

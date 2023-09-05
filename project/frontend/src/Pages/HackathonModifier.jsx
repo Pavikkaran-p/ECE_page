@@ -46,7 +46,7 @@ function HackathonModifier() {
       <div className='sticky top-0'>
         <Header IsLoggedIn={IsLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       </div>
-       <div className='flex'>
+       <div className='md:flex'>
         <div className='lg:w-[35%] sm:w-[90%]   '>
           <AddHackathonForm/>
         </div>
