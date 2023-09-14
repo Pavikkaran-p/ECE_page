@@ -59,28 +59,60 @@ function Poster() {
   return (
     <div>
         <ToastContainer/>
-        <form id='poster_form' onSubmit={handle_addposter} onReset={()=>setFormDetails({type:'hackathon'})}>
-            <div>
-                <label>Name :</label>
-                <input type='text' name='name' onChange={formupdate} required/>
-            </div>
-            <div>
-                <label>Type :</label>
-                <select name='type' defaultValue="hackathon" onChange={formupdate} >
-                <option value="hackathon">Hackathon</option>
-                <option value="event">Events</option>
-                <option value="conference">Conference</option>                    
-                </select>
-            </div>
-            <div>
-                <label>Image :</label>
-                <input type='file' name='image' onChange={imageupdate} required/>
-            </div>
-            <div>
-                <input type='reset'/>
-                <input type='submit' disabled={SubmitButton ? false : true}/>
-            </div>
-        </form>
+        <form
+  id="poster_form"
+  onSubmit={handle_addposter}
+  onReset={() => setFormDetails({ type: "hackathon" })}
+  className="m-4 p-8 bg-gradient-to-b from-blue-500 to-violet-600 rounded-2xl shadow-lg"
+>
+  <div className="mb-4">
+    <label className="block text-white">Name :</label>
+    <input
+      type="text"
+      name="name"
+      onChange={formupdate}
+      required
+      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-indigo-300"
+    />
+  </div>
+  <div className="mb-4">
+    <label className="block text-white">Type :</label>
+    <select
+      name="type"
+      defaultValue="hackathon"
+      onChange={formupdate}
+      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-indigo-300"
+    >
+      <option value="hackathon">Hackathon</option>
+      <option value="event">Events</option>
+      <option value="conference">Conference</option>
+    </select>
+  </div>
+  <div className="mb-4">
+    <label className="block text-white">Image :</label>
+    <input
+      type="file"
+      name="image"
+      onChange={imageupdate}
+      required
+      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-indigo-300"
+    />
+  </div>
+  <div className="flex items-center justify-between">
+    <input
+      type="reset"
+      className="px-4 py-2 text-white bg-indigo-500 rounded-md cursor-pointer hover:bg-indigo-600"
+    />
+    <input
+      type="submit"
+      disabled={!SubmitButton}
+      className={`px-4 py-2 text-white bg-indigo-300 rounded-md cursor-pointer ${
+        SubmitButton ? "hover:bg-indigo-400" : "bg-gray-300"
+      }`}
+    />
+  </div>
+</form>
+
     </div>
   )
 }
